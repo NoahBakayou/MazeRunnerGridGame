@@ -28,11 +28,46 @@ int ans = scanner.nextInt();
 Implements logic to update the player's position and check for walls, using a mix of conditional statements and loops.
 ```java
 if (ans == 1) {
-    // Code to move right
+    printBoard[iUserCol][iUserRow] = clearedSpace;
+    iUserRow++;
+    if (iUserRow < aiGrid[0].length) {
+        printBoard[iUserCol][iUserRow] = playerPiece;
+        if (aiGrid[iUserCol][iUserRow] == 1) {
+            printBoard[iUserCol][iUserRow] = wall;
+            System.out.println("You hit a wall. You lose.");
+            break;
+        }
+    } else {
+        System.out.println("You moved outside the grid. You lose.");
+        break;
+    }
 } else if (ans == 2) {
-    // Code to move down
+    printBoard[iUserCol][iUserRow] = clearedSpace;
+    iUserCol++;
+    if (iUserCol < aiGrid.length) {
+        printBoard[iUserCol][iUserRow] = playerPiece;
+        if (aiGrid[iUserCol][iUserRow] == 1) {
+            printBoard[iUserCol][iUserRow] = wall;
+            System.out.println("You hit a wall. You lose.");
+            break;
+        }
+    } else {
+        System.out.println("You moved outside the grid. You lose.");
+        break;
+    }
 }
-// Code to check for walls and update the grid
+// Code to update the grid display
+for (int y = 0; y < aiGrid.length; y++) {
+    for (int x = 0; x < aiGrid[0].length; x++) {
+        System.out.print(printBoard[y][x] + "  ");
+    }
+    System.out.println();
+}
+// Check for winner
+if (iUserRow == 9 && iUserCol == 9) {
+    System.out.println("You reached the end! You win!");
+    break;
+}
 ```
 ## How to Play
 1. **Start the Game**: Run the `GameGrid` class in your Java environment.
