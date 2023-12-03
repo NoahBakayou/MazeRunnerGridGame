@@ -10,11 +10,36 @@ Utilizes a 2D integer array (`int[][] aiGrid`) to represent the game grid, with 
 ```java
 int[][] aiGrid = new int[10][10];
 ```
-### Secure Randomization
-Employs java.security.SecureRandom to randomly place walls within the grid, enhancing the unpredictability of the game.
+## Linked List
+The linked list in this game is used to store the player's movement history and track their path on the grid. It enables the game to determine if the player wins or loses and to display the grid with the player's path highlighted.
 
 ```java
-SecureRandom oRand = new SecureRandom();
+LinkedList oLinkedList = new LinkedList();
+
+// ...
+
+while (iUserRow < 9 || iUserCol < 9) {
+    int ans = scanner.nextInt();
+    if (ans == 1) {
+        iUserCol++;
+        oLinkedList.addHeadNode(iUserRow, iUserCol); // Adding player's position to the linked list
+        playerMoves++;
+    } else if (ans == 2) {
+        iUserRow++;
+        oLinkedList.addHeadNode(iUserRow, iUserCol); // Adding player's position to the linked list
+        playerMoves++;
+    }
+
+    // ... (rest of the game logic)
+}
+
+while (oLinkedList.headNode != null) {
+    aiGrid[newNode.xPosition][newNode.yPosition] = 3;
+    newNode = oLinkedList.removeHeadNode(); // Removing player's position from the linked list
+}
+
+// ...
+
 ```
 ### Player Interaction
 Uses a java.util.Scanner object to capture player input, allowing for interactive movement within the grid.
@@ -24,7 +49,7 @@ Scanner scanner = new Scanner(System.in);
 int ans = scanner.nextInt();
 ```
 
-### Game Mechanics
+## Game Mechanics
 Implements logic to update the player's position and check for walls, using a mix of conditional statements and loops.
 ```java
 if (ans == 1) {
@@ -78,5 +103,5 @@ if (iUserRow == 9 && iUserCol == 9) {
    - Reach the bottom right corner of the grid to win.
    - Hitting a wall results in a loss.
      
-### Contributing
+## Contributing
 Contributions to MazeRunnerGridGame are welcome! Whether it's bug fixes, new features or improvements to existing features, I value any input. Please send pull requests or open an issue to discuss proposed changes.
